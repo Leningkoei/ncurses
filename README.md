@@ -200,80 +200,101 @@ curses bell and screen flash routines
 
 ### curs_bkgd
 
-- bkgd
+curses window background manipulation routines
 
-- bkgdset
+- (macro) void bkgdset(chtype ch);
+- void wbkgdset(WINDOW *win, chtype ch);
 
-- getbkgd
 
-- wbkgd
+- (macro) int bkgd(chtype ch);
+- int wbkgd(WINDOW *win, chtype ch);
 
-- wbkgdset
+
+- chtype getbkgd(WINDOW *win);
+
 
 
 ### curs_bkgrnd
 
-- bkgrnd
+curses window complex background manipulation routines
 
-- bkgrndset
+- (macro) int bkgrnd(const cchar_t *wch);
+- int wbkgrnd(WINDOW *win, const cchar_t *wch);
 
-- getbkgrnd
 
-- wbkgrnd
+- (macro) void bkgrndset(const cchar_t *wch);
+- void wbkgrndset(WINDOW *win, const cchar_t *wch);
 
-- wbkgrndset
 
-- wgetbkgrnd
+- (macro) int getbkgrnd(cchar_t *wch);
+- int wgetbkgrnd(WINDOW *win, cchar_t *wch);
+
 
 
 ### curs_border
 
-- border
+create curses borders, horizontal and vertical
 
-- box
+- (macro) int border(chtype ls, chtype rs,
+                     chtype ts, chtype bs,
+                     chtype tl, chtype tr,
+                     chtype bl, chtype br);
+- int wborder(WINDOW *win,
+              chtype ls, chtype rs,
+              chtype ts, chtype bs,
+              chtype tl, chtype tr,
+              chtype bl, chtype br);
 
-- hline
 
-- mvhline
+- (macro) int box(WINDOW *win, chtype verch, chtype horch);
 
-- mvvline
 
-- mvwhline
+- int hline(chtype ch, int n);
+- int whline(WINDOW *win, chtype ch, int n);
 
-- mvwvline
+- int vline(chtype ch, int n);
+- int wvline(WINDOW *win, chtype ch, int n);
 
-- vline
 
-- wborder
+- int mvhline(int y, int x, chtype ch, int n);
+- int mvwhline(WINDOW *win, int y, int x, chtype ch, int n);
 
-- whline
+- int mvvline(int y, int x, chtype ch, int n);
+- int mvwvline(WINDoW *win, int y, int x, chtype ch, int n);
 
-- wvline
+
 
 
 ### curs_border_set
 
-- border_set
+create curses borders or lines using complex characters and renditions
 
-- box_set
+- (macro) int border_set(const cchar_t *ls, const cchar_t *rs,
+                         const cchar_t *ts, const cchar_t *bs,
+                         const cchar_t *tl, const cchar_t *br);
+- int wborder_set(WINDOW *win,
+                  const cchar_t *ls, const cchar_t *rs,
+                  const cchar_t *ts, const cchar_t *bs,
+                  const cchar_t *tl, const cchar_t *tr,
+                  const cchar_t *bl, const cchar_t *br);
 
-- hline_set
 
-- mvhline_set
+- int box_set(WINDOW *win, const cchar_t *verch, const cchar_t *horch);
 
-- mvvline_set
 
-- mvwhline_set
+- (macro) int hline_set(const cchar_t *wch, int n);
+- int whline_set(const cchar_t *wch, int n);
 
-- mvwvline_set
+- (macro) int vline_set(const cchar_t *wch, int n);
+- int wvline_set(const cchar_t *wch, int n);
 
-- vline_set
 
-- wborder_set
+- (macro) int mvhline_set(const cchar_t *wch, int n);
+- (macro) int mvwhline_set(WINDOW *win, const cchar_t *wch, int n);
 
-- whline_set
+- (macro) int mvvline_set(const cchar_t *wch, int n);
+- (macro) int mvwvline_set(WINDOW *win, const cchar_t *wch, int n);
 
-- wvline_set
 
 
 ### curs_color
