@@ -6,168 +6,196 @@ A ncurses interface for common lisp (sbcl).
 
 ### curs_addch
 
-- addch
+add a character (with attributes) to a curses window, then advance the cursor
 
-- echochar
+- (macro) int addch(const chtype ch);
+- int waddch(WINDOW *win, const chtype ch);
 
-- mvaddch
+- (macro) int mvaddch(int y, int x, const chtype ch);
+- (macro) int mvwaddch(WINDOW *win, int y, int x, const chtype ch);
 
-- mvwaddch
 
-- waddch
+- (macro) int echochar(const chtype ch);
+- int wechochar(WINDOW *win, const chtype ch);
 
-- wechochar
 
 
 ### curs_addchstr
 
-- addchnstr
+add a string of characters (and attributes) to a curses window
 
-- addchstr
+- (macro) int addchstr(const chtype *chstr);
+- (macro) int addchnstr(const chtype *chstr, int n);
 
-- mvaddchnstr
+- (macro) int waddchstr(WINDOW *win, const chtype *chstr);
+- int waddchnstr(WINDOW *win, const chtype *chstr, int n);
 
-- mvwaddchnstr
 
-- mvwaddchstr
+- (macro) int mvaddchstr(int y, int x, const chtype *chstr);
+- (macro) int mvaddchnstr(int y, int x, const chtype *chstr, int n);
 
-- waddchnstr
+- (macro) int mvwaddchstr(WINDOW *win, int y, int x, const chtype *chstr);
+- (macro) int mvwaddchnstr(WINDOW *win, int y, int x, const chtype *chstr, int n);
 
-- waddchstr
 
 
 ### curs_addstr
 
-- addnstr
+add a string of characters to a curses window and advance cursor
 
-- addstr
+- (macro) int addstr(const char *str);
+- (macro) int addnstr(const char *str, int n);
 
-- mvaddchstr
+- (macro) int waddstr(WINDOW *win, const char *str);
+- int waddnstr(WINDOW *win, const char *str, int n);
 
-- mvaddstr
 
-- mvwaddnstr
+- (macro) int mvaddstr(int y, int x, const char *str);
+- (macro) int mvaddnstr(int y, int x, const char *str, int n);
 
-- mvwaddstr
+- (macro) int mvwaddstr(WINDOW *win, int y, int x, const char *str);
+- (macro) int mvwaddnstr(WINDOW *win, int y, int x, const char *str, int n);
 
-- waddnstr
-
-- waddstr
 
 
 ### curs_add_wch
 
-- add_wch
+add a complex character and rendition to a curses window, then advance the cursor
 
-- echo_wchar
+- (macro) int add_wch(const cchar_t *wch);
+- int wadd_wch(WINDOW *win, const cchar_t *wch);
 
-- mvadd_wch
+- (macro) int mvadd_wch(int y, int x, const cchar_t *wch);
+- (macro) int mvwadd_wch(WINDOW *win, int y, int x, const cchar_t *wch);
 
-- mvwadd_wch
 
-- wadd_wch
-
-- wecho_wchar
+- int echo_wchar(const cchar_t *wch);
+- (macro) int wecho_wchar(WINDOW *win, const cchar_t *wch);
 
 
 ### curs_add_wchstr
 
-- add_wchnstr
+add an array of complex characters (and attributes) to a curses window
 
-- add_wchstr
+- (macro) int add_wchstr(const cchar_t *wchstr);
+- (macro) int add_wchnstr(const cchar_t *wchstr, int n);
 
-- mvadd_wchnstr
+- (macro) int wadd_wchstr(WINDOW *win, const cchar_t *wchstr);
+- int wadd_wchnstr(WINDOW *win, const cchar_t *wchstr, int n);
 
-- mvadd_wchstr
 
-- mvwadd_wchnstr
+- (macro) int mvadd_wchstr(int y, int x, const cchar_t *wchstr);
+- (macro) int mvadd_wchnstr(int y, int x, const cchar_t *wchstr, int n);
 
-- mvwadd_wchstr
+- (macro) int mvwadd_wchstr(WINDOW *win, int y, int x, const cchar_t *wchstr);
+- (macro) int mvwadd_wchnstr(WINDOW *win, int y, int x, const cchar_t *wchstr, int n);
 
-- wadd_wchnstr
-
-- wadd_wchstr
 
 
 ### curs_addwstr
 
-- addnwstr
+add a string of wide characters to a curses window and advance cursor
 
-- addwstr
+- (macro) int addwstr(const wchar_t *wstr);
+- (macro) int addnwstr(const wchar_t *wstr, int n);
 
-- mvaddnwstr
+- (macro) int waddwstr(WINDOW *win, const wchar_t *wstr);
+- int waddnwstr(WINDOW *win, const wchar_t *wstr, int n);
 
-- mvaddwstr
 
-- mvwaddnwstr
+- (macro) int mvaddwstr(int y, int x, const wchar_t *wstr);
+- (macro) int mvaddnwstr(int y, int x, const wchar_t *wstr, int n);
 
-- mvwaddwstr
+- (macro) int mvwaddwstr(WINDOW *win, int y, int x, const wchar_t *wstr);
+- (macro) int mvwaddnwstr(WINDOW *win, int y, int x, const wchar_t *wstr, int n);
 
-- waddnwstr
-
-- waddwstr
 
 
 ### curs_attr
 
+curses character and window attribute control
+
 - PAIR_NUMBER
 
-- attr_get
 
-- attr_off
+- int attr_get(attr_t *attrs, short *pair, void *opts);
+- int wattr_get(WINDOW *win, attr_t *attrs, short *pair, void *opts);
 
-- attr_on
+- int attr_set(attr_t *attrs, short *pair, void *opts);
+- int wattr_set(WINDOW *win, attr_t *attrs, short *pair, void *opts);
 
-- attr_set
 
-- attroff
+- int attr_off(attr_t *attrs, void *opts);
+- int wattr_off(WINDOW *win, attr_t *attrs, void *opts);
 
-- attron
+- int attr_on(attr_t *attrs, void *opts);
+- int wattr_on(WINDOW *win, attr_t *attrs, void *opts);
 
-- attrset
 
-- chgat
+- (macro) int attroff(int attrs);
+- (macro) int wattroff(WINDOW *win, int attrs);
 
-- color_set
+- (macro) int attron(int attrs);
+- (macro) int wattron(WINDOW *win, int attrs);
+
+- (macro) int attrset(int attrs);
+- (macro) int wattrset(WINDOW *win, int attrs);
+
+
+- int chgat(int n, attr_t attr, short pair, const void *opts);
+- int wchgat(WINDOW *win, int n, attr_t attr, short pair, const void *opts);
+
+- int mvchgat(int y, int x, int n, attr_t attr, short pair, const void *opts);
+- int mvwchgat(WINDOW *win, int y, int x, int n, attr_t attr, short pair, const void *opts);
+
+
+- int color_set(short pair, void *opts);
+- int wcolor_set(WINDOW *win, short pair, void *opts);
+
+- (macro) int standend(void);
+- int wstandend(WINDOW *win);
+
+- (macro) int standout(void);
+- int wstandout(WINDOW *win);
+
 
 - getattrs
 
-- mvchgat
 
-- mvwchgat
 
-- standend
+#### video attributes
 
-- standout
+- A_NORMAL: Noremal display (no highlight).
+- A_STANDOUT: Best highlightling mode of the terminal.
+- A_UNDERLINE: Underlining.
+- A_REVERSE: Reverse video.
+- A_BLINK: Blinking.
+- A_DIM: Half bright.
+- A_BOLD: Extra bright or bold.
+- A_PROTECT: Protected mode.
+- A_INVIS: Invisible or blank mode.
+- A_ALTCHARSET: Alternate character set.
+- A_ITALIC: Italics (non-X/Open extension).
+- A_CHARTEXT: Bit-mask to extract a character.
+- A_COLOR: Bit-mask to extract a color (legacy routines).
 
-- wattr_get
+- WA_HORIZONTAL: Horizontal highlight.
+- WA_LEFT: Left highlight.
+- WA_LOW: Low highlight.
+- WA_RIGHT: Right highlight.
+- WA_TOP: Top highlight.
+- WA_VERTICAL: Vertical highlight.
 
-- wattr_off
-
-- wattr_on
-
-- wattr_set
-
-- wattroff
-
-- wattron
-
-- wattrset
-
-- wchgat
-
-- wcolor_set
-
-- wstandend
-
-- wstandout
 
 
 ### curs_beep
 
-- beep
+curses bell and screen flash routines
 
-- flash
+- int beep(void);
+
+- int flash(void);
+
 
 
 ### curs_bkgd
