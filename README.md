@@ -115,9 +115,6 @@ add a string of wide characters to a curses window and advance cursor
 
 curses character and window attribute control
 
-- PAIR_NUMBER
-
-
 - int attr_get(attr_t *attrs, short *pair, void *opts);
 - int wattr_get(WINDOW *win, attr_t *attrs, short *pair, void *opts);
 
@@ -297,85 +294,110 @@ create curses borders or lines using complex characters and renditions
 
 
 
-### curs_color
-
-- COLOR_PAIR
-
-- can_change_color
-
-- color_content
-
-- extended_color_content*
-
-- extended_pair_content*
-
-- has_colors
-
-- init_color
-
-- init_extended_color*
-
-- init_extended_pair*
-
-- init_pair
-
-- pair_content
-
-- reset_color_pairs*
-
-- start_color
-
-
 ### curs_clear
 
-- clear
+clear all or part of a curses window
 
-- clrtobot
+- (macro) int erase(void);
+- (macro) int werase(WINDOW *win);
 
-- clrtoeol
 
-- erase
+- (macro) int clear(void);
+- (macro) int wclear(WINDOW *win);
 
-- wclear
 
-- wclrtobot
+- (macro) int clrtobot(void);
+- int wclrtobot(WINDOW *win);
 
-- wclrtoeol
 
-- werase
+- (macro) int clrtoeol(void);
+- int wclrtoeol(WINDOW *win);
+
+
+
+### curs_color
+
+curses color manipulation routines
+
+- int start_color(void);
+
+
+- bool has_colors(void);
+
+- bool can_change_color(void);
+
+
+- int init_pair(short pair, short f, short b);
+- int init_extended_pair(int pair, int f, int b);*
+
+- int init_color(short color, short r, short g, short b);
+- int init_extended_color(int color, int r, int g, int b);*
+
+
+- int color_content(short color, short *r, short *g, short *b);
+- int extended_color_content(int color, int *r, int *g, int *b);*
+
+- int pair_content(short pair, short *f, short *b);
+- int extended_pair_content(int pair, int *f, int short *b);*
+
+
+- void reset_color_pairs(void);*
+
+
+- int COLOR_PAIR(int n);
+
+- PAIR_NUMBER(attrs);
+
+
+#### colors
+
+- COLOR_BLACK
+- COLOR_RED
+- COLOR_GREEN
+- COLOR_YELLOW
+- COLOR_BLUE
+- COLOR_MAGENTA
+- COLOR_CYAN
+- COLOR_WHITE
+
 
 
 ### curs_delch
 
-- delch
+delete character under the curses in a curses window
 
-- mvdelch
+- (macro) int delch(void);
+- int wdelch(WINDOW *win);
 
-- mvwdelch
+- (macro) int mvdelch(int y, int x);
+- (macro) int mvwdelch(WINDOW *win, int y, int x);
 
-- wdelch
 
 
 ### curs_deleteln
 
-- deleteln
+delete and insert lines in a curses window
 
-- insdelln
+- int deleteln(void);
+- int wdeleteln(WINDOW *win);
 
-- insertln
 
-- wdeleteln
+- int insdelln(int n);
+- (macro) int winsdelln(WINDOW *win);
 
-- winsdelln
 
-- winsertln
+- int insertln(void);
+- int winsertln(WINDOW *win);
+
 
 
 ### curs_extend
 
-- curses_version*
+miscellaneous curses extensions
 
-- use_extended_names*
+- const char *curses_version(void);*
+
+- int use_extended_names(bool enable);*
 
 
 ### curs_getcchar
