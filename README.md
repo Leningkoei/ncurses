@@ -402,301 +402,325 @@ miscellaneous curses extensions
 
 ### curs_getcchar
 
-- getcchar
+get a wide character string and rendition from a cchar_t or set a cchar_t from a wide-character string
 
-- setcchar
+- int getcchar(const cchar_t *wcval,
+               wchar_t       *wch,
+               attr_t        *attrs,
+               short         *color_pair,
+               void          *opts);
+
+
+- int setcchar(cchar_t       *wcval,
+               const wchar_t *wch,
+               const attr_t  attrs,
+               short         pair,
+               const void    *opts);
+
 
 
 ### curs_getch
 
-- getch
+get (or push back) characters from curses terminal keyboard
 
-- has_key*
+- (macro) int getch(void);
+- int wgetch(WINDOW *win);
 
-- mvgetch
 
-- mvwgetch
+- (macro) int mvgetch(int y, int x);
+- (macro) int mvwgetch(WINDOW *win, int y, int x);
 
-- ungetch
 
-- wgetch
+- int ungetch(int ch);
+
+
+- int has_key(int ch);*
+
 
 
 ### curs_getstr
 
-- getnstr
+accept character string from curses terminal keyboard
 
-- getstr
+- (macro) int getstr(char *str);
+- int getnstr(char *str);
 
-- mvgetnstr
+- int wgetstr(char *str);
+- int wgetnstr(char *str);
 
-- mvgetstr
 
-- mvwgetnstr
+- (macro) int mvgetstr(char *str);
+- int mvgetnstr(char *str);
 
-- mvwgetstr
+- (macro) int mvwgetstr(char *str);
+- int mvwgetnstr(char *str);
 
-- wgetnstr
-
-- wgetstr
 
 
 ### curs_get_wch
 
-- get_wch
+get (or push back) a wide character from curses terminal keyboard
 
-- mvget-wch
+- (macro) int get_wch(wint_t *wch);
+- int wget_wch(WINDOW *win, wint_t *wch);
 
+- (macro) int mvget-wch(int y, int x, wint_t *wch);
+- (macro) int mvwget_wch(WINDOW *win, int y, int x, wint_t *wch);
+
+
+- int unget_wch(const wchar_t wch);
 - mvwdelch
 
-- mvwget_wch
-
-- unget_wch
-
-- wget_wch
 
 
 ### curs_get_wstr
 
-- get_wstr
+get an array of wide characters from a curses terminal keyboard
 
-- getn_wstr
+- (macro) int get_wstr(wint_t *wstr);
+- (macro) int getn_wstr(wint_t *wstr, int n);
 
-- mvget_wstr
+- (macro) int wget_wstr(WINDOW *win, wint_t *wstr);
+- int wgetn_wstr(WINDOW *win, wint_t *wstr, int n);
 
-- mvgetn_wstr
 
-- mvwget_wstr
+- (macro) int mvget_wstr(int y, int x, wint_t *wstr);
+- (macro) int mvgetn_wstr(int y, int x, wint_t *wstr, int n);
 
-- mvwgetn_wstr
-
-- wget_wstr
-
-- wgetn_wstr
+- (macro) int mvwget_wstr(WINDOW *win, int y, int x, wint_t *wstr);
+- (macro) int mvwgetn_wstr(WINDOW *win, int y, int x, wint_t *wstr, int n);
 
 
 ### curs_getyx
 
-- getbegyx
+get curses cursor and window coordinates
 
-- getmaxyx
+- (macro) void getyx(WINDOW *win, int y, int x);
+- (macro) void getparyx(WINDOW *win, int y, int x);
+- (macro) void getbegyx(WINDOW *win, int y, int x);
+- (macro) void getmaxyx(WINDOW *win, int y, int x);
 
-- getparyx
-
-- getyx
 
 
 ### curs_in_wch
 
-- in_wch
+extract a complex character and rendition from a window
 
-- mvin_wch
+- (macro) int in_wch(cchar_t *wcval);
+- (macro) int win_wch(WINDOW *win, cchar_t *wcval);
 
-- mvwin_wch
 
-- win_wch
+- (macro) int mvin_wch(int y, int x, cchar_t *wcval);
+- (macro) int mvwin_wch(WINDOW *win, int y, int x, cchar_t *wcval);
+
 
 
 ### curs_in_wchstr
 
-- in_wchnstr
+get an array of complex characters and renditions from a curses window
 
-- in_wchstr
+- (macro) int in_wchstr(cchar_t *wchstr);
+- int in_wchnstr(cchar_t *wchstr, int n);
 
-- mvin_wchnstr
+- (macro) int win_wchstr(WINDOW *win, cchar_t *wchstr);
+- (macro) int win_wchnstr(WINDOW *win, cchar_t *wchstr, int n);
 
-- mvin_wchstr
 
-- mvwin_wchnstr
+- (macro) int mvin_wchstr(cchar_t *wchstr);
+- (macro) int mvin_wchnstr(cchar_t *wchstr, int n);
 
-- mvwin_wchstr
-
-- win_wchnstr
-
-- win_wchstr
+- (macro) int mvwin_wchstr(WINDOW *win, int y, int x, cchar_t *wchstr);
+- (macro) int mvwin_wchnstr(WINDOW *win, int y, int x, cchar_t *wchstr, int n);
 
 
 ### curs_inch
 
-- inch
+get a character and attributes from a curses window
 
-- mvinch
+- (macro) chtype inch(void);
+- (macro) chtype winch(WINDOW *win);
 
-- mvwinch
 
-- winch
+- (macro) chtype mvinch(int y, int x);
+- (macro) chtype mvwinch(WINDoW *win, int y, int x);
+
+
 
 ### curs_inchstr
 
-- inchnstr
+get a string of characters (and attributes) from a curses window
 
-- inchstr
+- (macro) int inchstr(ctype *chstr);
+- (macro) int inchnstr(ctype *chstr, int n);
 
-- mvinchnstr
+- (macro) int winchstr(WINDOW *win, ctype *chstr);
+- int winchnstr(WINDOW *win, ctype *chstr, int n);
 
-- mvinchstr
 
-- mvinchnstr
+- (macro) int mvinchstr(ctype *chstr);
+- (macro) int mvinchnstr(ctype *chstr, int n);
 
-- mvinchstr
+- (macro) int mvwinchstr(WINDOW *win, int y, int x, ctype *chstr);
+- (macro) int mvwinchnstr(WINDOW *win, int y, int x, ctype *chstr, int n);
 
-- winchnstr
-
-- winchstr
 
 
 ### curs_initscr
 
-- delscreen
+curses screen initialization and manipulation routines
 
-- endwin
+- WINDOW *initscr(void);
+- int endwin(void);
 
-- initscr
 
-- isendwin
+- bool isendwin(void);
 
-- newterm
 
-- set_term
+- SCREEN *newterm(const char *type, FILE *outfd, FILE *infd);
+- SCREEN *set_term(SCREEN *new);
+- void delscreen(SCREEN *sp);
+
 
 
 ### curs_inopts
 
-- cbreak
+- int cbreak(void);
+- int nocbreak(void);
 
-- echo
 
-- halfdelay
+- (macro) int echo(void);
+- (macro) int noecho(void);
 
-- intrflush
 
-- keypad
+- (macro) int intrflush(WINDOW *win, bool bf);
+- int keypad(WINDOW *win, bool bf);
+- (macro) int meta(WINDOW *win, bool bf);
+- (macro) int nodelay(WINDOW *win, bool bf);
+- (macro) int notimeout(WINDOW *win, bool bf);
 
-- meta
 
-- nl
+- (macro) int nl(void);
+- (macro) int nonl(void);
 
-- nocbreak
 
-- nodelay
+- int raw(void);
+- int noraw(void);
 
-- noecho
 
-- nonl
+- (macro) void qiflush(void);
+- (macro) void noqiflush(void);
 
-- noqiflush
 
-- noraw
+- (macro) int halfdelay(int tenths);
+- (macro) void timeout(int delay);
+- (macro) void wtimeout(WINDOW *win, int delay);
 
-- notimeout
 
-- qiflush
+- int typeahead(int fd);
 
-- raw
-
-- timeout
-
-- typeahead
-
-- wtimeout
 
 
 ### curs_ins_wch
 
-- ins_wch
+insert a complex character and rendition into a window
 
-- mvins_wch
+- int ins_wch(const cchar_t *wch);
+- int wins_wch(WINDOW *win, const cchar_t *wch);
 
-- mvwins_wch
 
-- wins_wch
+- int mvins_wch(int y, int x, const cchar_t *wch);
+- int mvwins_wch(WINDOW *win, int y, int x, const cchar_t *wch);
+
 
 
 ### curs_ins_wstr
 
-- ins_nwstr
+insert a wide-character string into a curses window
 
-- ins_wstr
+- (macro) int ins_wstr(const wchar_t *wstr);
+- (macro) int ins_nwstr(const wchar_t *wstr, int n);
 
-- mvins_nwstr
+- (macro) int wins_wstr(WINDOW *win, const wchar_t *wstr);
+- int wins_nwstr(WINDOW *win, const wchar_t *wstr, int n);
 
-- mvins_wstr
 
-- mvins_nwstr
+- (macro) int mvins_wstr(int y, int x, const wchar_t *wstr);
+- (macro) int mvins_nwstr(int y, int x, const wchar_t *wstr, int n);
 
-- mvwins_wstr
+- (macro) int mvwins_wstr(WINDOW *win, int y, int x, const wchar_t *wstr);
+- (macro) int mvwins_nwstr(WINDOW *win, int y, int x, const wchar_t *wstr, int n);
 
-- wins_nwstr
-
-- wins_wstr
 
 
 ### curs_insch
 
-- insch
+insert a character before curses in a curses window
 
-- mvinsch
+- (macro) int insch(chtype ch);
+- int winsch(WINDOW *win, chtype ch);
 
-- mvwinsch
 
-- winsch
+- (macro) int mvinsch(int y, int x, chtype ch);
+- (macro) int mvwinsch(WINDOW *win, int y, int x, chtype ch);
+
 
 
 ### curs_insstr
 
-- insnstr
+insert string before cursor in a curses window
 
-- insstr
+- (macro) int insstr(const char *str);
+- (macro) int insnstr(const char *str, int n);
 
-- mvinsnstr
+- (macro) int winsstr(WINDOW *win, const char *str);
+- int winsnstr(WINDOW *win, const char *str, int n);
 
-- mvinsstr
 
-- mvwinsnstr
+- (macro) int mvinsstr(int y, int x, const char *str);
+- (macro) int mvinsnstr(int y, int x, const char *str, int n);
 
-- mvwinsstr
+- (macro) int mvwinsstr(WINDOW *win, int y, int x, const char *str);
+- (macro) int mvwinsnstr(WINDOW *win, int y, int x, const char *str, int n);
 
-- winsnstr
-
-- winsstr
 
 
 ### curs_instr
 
-- innstr
+get a string of characters from a curses window
 
-- instr
+- (macro) int instr(char *str);
+- (macro) int innstr(char *str, int n);
 
-- mvinnstr
+- (macro) int winstr(WINDOW *win, char *str);
+- int winnstr(WINDOW *win, char *str, int n);
 
-- mvinstr
 
-- mvwinnstr
+- (macro) int mvwinstr(int y, int x, char *str);
+- (macro) int mvwinnstr(int y, int x, char *str, int n);
 
-- mvwinstr
+- (macro) int mvinstr(WINDOW *win, int y, int x, char *str);
+- (macro) int mvinnstr(WINDOW *win, int y, int x, char *str, int n);
 
-- winnstr
 
-- winstr
 
 
 ### curs_inwstr
 
-- innwstr
+get a string of wchar_t character from a curses window
 
-- inwstr
+- (macro) int inwstr(wchar_t *wstr);
+- (macro) int innwstr(wchar_t *wstr, int n);
 
-- mvinnwstr
+- (macro) int winwstr(WINDOW *win, wchar_t *wstr);
+- int winnwstr(WINDOW *win, wchar_t *wstr, int n);
 
-- mvinwstr
 
-- mvwinnwstr
+- (macro) int mvinwstr(int y, int x, wchar_t *wstr);
+- (macro) int mvinnwstr(int y, int x, wchar_t *wstr, int n);
 
-- mvwinwstr
+- (macro) int mvwinwstr(WINDOW *win, int y, int x, wchar_t *wstr);
+- (macro) int mvwinnwstr(WINDOW *win, int y, int x, wchar_t *wstr, int n);
 
-- winnwstr
-
-- winwstr
 
 
 ### curs_kernel
