@@ -156,10 +156,6 @@ curses character and window attribute control
 - int wstandout(WINDOW *win);
 
 
-- getattrs
-
-
-
 #### video attributes
 
 - A_NORMAL: Noremal display (no highlight).
@@ -725,56 +721,69 @@ get a string of wchar_t character from a curses window
 
 ### curs_kernel
 
-- curs_set
+low-level curses routines
 
-- def_prog_mode
-
-- def_shell_mode
-
-- getsyx
-
-- napms
-
-- reset_prog_mode
-
-- reset_shell_mode
-
-- resetty
-
-- ripoffline
-
-- savetty
-
-- setsyx
+- int def_prog_mode(void);
+- int def_shell_mode(void);
 
 
-### curs_legacy
+- int reset_prog_mode(void);
+- int reset_shell_mode(void);
 
-- getbegx*
 
-- getbegy*
+- int resetty(void);
+- int savetty(void);
 
-- getcurx*
 
-- getcury*
+- (macro) void getsyx(int y, int x);
+- void setsyx(int y, int x);
 
-- getmaxx*
 
-- getmaxy*
+- int ripoffline(int line, int (*init)(WINDOW *, int));
 
-- getparx*
+- int curs_set(int visibility);
 
-- getpary*
+- int napms(int ms);
+
+
+
+### curs_legacy*
+
+get curses cursor and window coordinates, attributes
+
+- int getattrs(const WINDOW *win);
+
+
+- int getbegx(const WINDOW *win);
+- int getbegy(const WINDOW *win);
+
+
+- int getcurx(const WINDOW *win);
+- int getcury(const WINDOW *win);
+
+
+- int getmaxx(const WINDOW *win);
+- int getmaxy(const WINDOW *win);
+
+
+- int getparx(const WINDOW *win);
+- int getpary(const WINDOW *win);
 
 
 ### curs_memleaks*
 
-- exit_curses
+curses memory-leak checking
 
-- exit_terminfo
+- void exit_curses(int code);
 
 
-### curs_mouse
+- #include <term.h> void exit_terminfo(int code);
+
+
+
+### curs_mouse(todo)
+
+mouse interface through curses
 
 - getmouse*
 
@@ -795,395 +804,492 @@ get a string of wchar_t character from a curses window
 
 ### curs_move
 
-- move
+move curses window cursor
 
-- wmove
+- (macro) int move(int y, int x);
+
+- int wmove(WINDOW *win, int y, int x);
 
 
 ### curs_opaque
 
-- is_cleared*
+curses window properties
 
-- is_idcok*
+- bool is_cleared(const WINDOW *win);*
 
-- is_idlok*
+- bool is_idcok(const WINDOW *win);*
 
-- is_immedok*
+- bool is_idlok(const WINDOW *win);*
 
-- is_keypad*
+- bool is_immedok(const WINDOW *win);*
 
-- is_leaveok*
+- bool is_keypad(const WINDOW *win);*
 
-- is_nodelay*
+- bool is_leaveok(const WINDOW *win);*
 
-- is_notimeout*
+- bool is_nodelay(const WINDOW *win);*
 
-- is_pad*
+- bool is_notimeout(const WINDOW *win);*
 
-- is_scrollok*
+- bool is_pad(const WINDOW *win);*
 
-- is_subwin*
+- bool is_scrollok(const WINDOW *win);*
 
-- is_syncok*
+- bool is_subwin(const WINDOW *win);*
 
-- wgetdelay*
+- bool is_syncok(const WINDOW *win);*
 
-- wgetparent*
+- WINDOW *wgetparent(const WINDOW *win);*
 
-- wgetscrreg*
+- int wgetdelay(const WINDOW *win);*
+
+- int wgetscrreg(const WINDOW *win, int *top, int *bottom);*
+
 
 
 ### curs_outopts
 
-- clearok
+curses output options
 
-- idcok
+- (macro) int clearok(WINDOW *win, bool bf);
 
-- idlok
+- int idlok(WINDOW *win, bool bf);
 
-- immedok
+- (macro) void idcok(WINDOW *win, bool bf);
 
-- leaveok
+- void immedok(WINDOW *win, bool bf);
 
-- scrollok
+- (macro) int leaveok(WINDOW *win, bool bf);
 
-- setscrreg
+- (macro) int scrollok(WINDOW *win, bool bf);
 
-- wsetscrreg
+
+- (macro) int setscrreg(int top, int bot);
+- int wsetscrreg(WINDOW *win, int top, int bot);
+
 
 
 ### curs_overlay
 
-- copywin
+overlay and manipulate overlapped curses windows
 
-- overlay
+- (macro) int overlay(const WINDOW *srcwin, WINDOW *dstwin);
 
-- overwrite
+- (macro) int overwrite(const WINDOW *srcwin, WINDOW *dstwin);
+
+- int copywin(const WINDOW *srcwin, WINDOW *dstwin,
+              int sminrow, int smincol,
+              int dminrow, int dmincol,
+              int dmaxrow, int dmaxcol,
+              int overlay);
+
 
 
 ### curs_pad
 
-- newpad
+create and display curses pads
 
-- pecho_wchar*
+- WINDOW *newpad(int nlines, int ncols);
+- WINDOW *subpad(WINDOW *orig, int nlines, int ncols, int begin_y, int begin_x);
 
-- pechochar
+- int prefresh(WINDOW *pad,
+               int pminrow, int pmincol,
+               int sminrow, int smincol,
+               int smaxrow, int smaxcol);
+- int pnoutrefresh(WINDOW *pad,
+                   int pminrow, int pmincol,
+                   int sminrow, int smincol,
+                   int smaxrow, int smaxcol);
 
-- pnoutrefresh
+- (macro) int pechochar(WINDOW *pad, chtype ch);
+- int pecho_wchar(WINDOW *pad, const cchar_t *wch);*
 
-- prefresh
-
-- subpad
 
 
 ### curs_print
 
-- mcprint*
+ship binary data to printer
+
+- int mcprint(char *data, int len);*
 
 
 ### curs_printw
 
-- mvprintw
+- int printw(const char *fmt, ...);
+- int wprintw(WINDOW *win, const char *fmt, ...);
 
-- mvwprintw
 
-- printw
+- int mvprintw(int y, int x, const char *fmt, ...);
+- int mvwprintw(WINDOW *win, int y, int x, const char *fmt, ...);
 
-- vw_printw
 
-- vwprintw
+- int vw_printw(WINDOW *win, const char *fmt, va_list varglist);
 
-- wprintw
+
+- int vwprintw(WINDOW *win, const char *fmt, va_list varglist);
 
 
 ### curs_refresh
 
-- doupdate
+refresh curses windows and lines
 
-- redrawwin
+- (macro) int refresh(void);
+- int wrefresh(WINDOW *win);
 
-- refresh
+- int wnoutrefresh(WINDOW *win);
 
-- wnoutrefresh
+- int doupdate(void);
 
-- wredrawln
 
-- wrefresh
+- (macro) int redrawwin(WINDOW *win);
+
+- int wredrawln(WINDOW *win, int beg_line, int num_lines);
+
 
 
 ### curs_scanw
 
-- mvscanw
+convert formatted input from a curses window
 
-- mvwscanw
+- int scanw(const char *fmt, ...);
+- int wscanw(WINDOW *win, const char *fmt, ...);
 
-- scanw
+- int mvscanw(int y, int x, const char *fmt, ...);
+- int mvwscanw(WINDOW *win, int y, int x, const char *fmt, ...);
 
-- vw_scanw
 
-- vwscanw
+- int vw_scanw(WINDOW *win, const char *fmt, va_list varglist);
 
-- wscanw
+
+- int vwscanw(WINDOW *win, const char *fmt, va_list varglist);
+
 
 
 ### curs_scr_dump
 
-- scr_dump
+read (write) a curses screen from (to) a file
 
-- scr_init
+- int scr_dump(const char *filename);
 
-- scr_restore
+- (macro) int scr_restore(const char *filename);
 
-- scr_set
+- (macro) int scr_init(const char *filename);
+
+- (macro) int scr_set(const char *filename);
 
 
 ### curs_scroll
 
-- scrl
+scroll a curses window
 
-- scroll
+- (macro) int scroll(WINDOW *win);
 
-- wscrl
+- (macro) int scrl(int n);
+- int wscrl(WINDOW *win, int n);
 
 
 ### curs_slk
 
-- extended_slk_color*
+curses soft label routines
 
-- slk_attr*
+- int slk_init(int fmt);
 
-- slk_attr_off
 
-- slk_attr_on
+- int slk_set(int labnum, const char *label, int fmt);
+- int slk_wset(int labnum, const char *label, int fmt);
 
-- slk_attr_set
 
-- slk_attroff
+- int slk_label(int labnum);
 
-- slk_attron
 
-- slk_attrset
+- int slk_refresh(void);
+- int slk_noutrefresh(void);
 
-- slk_clear
+- int slk_clear(void);
 
-- slk_color
+- int slk_restore(void);
 
-- slk_init
+- int slk_touch(void);
 
-- slk_label
 
-- slk_noutrefresh
+- int slk_attron(const chtype attrs);
+- int slk_attroff(const chtype attrs);
+- int slk_attrset(const chtype attrs);
 
-- slk_refresh
+- int slk_attr_on(attr_t attrs, void *opts);
+- int slk_attr_off(const attr_t attrs, void *opts);
+- int slk_attr_set(const attr_t attrs, short pair, void *opts);
 
-- slk_restore
+- int slk_attr(void)*
 
-- slk_set
 
-- slk_touch
+- int slk_color(short pair);
 
-- slk_wset
+
+- int extended_slk_color(int pair);*
+
 
 
 ### curs_termattrs
 
-- baudrate
+curses environment query routines
 
-- erasechar
+- int baudrate(void);
 
-- erasewchar
+- char erasechar(void);
 
-- has_ic
+- int erasewchar(wchar_t *ch);
 
-- has_il
+- bool has_ic(void);
 
-- killchar
+- bool has_il(void);
 
-- killwchar
+- char killchar(void);
 
-- longname
+- int killwchar(wchar_t *ch);
 
-- term_attrs
+- char *longname(void);
 
-- termattrs
+- attr_t term_attrs(void);
 
-- termname
+- (macro) chtype termattrs(void);
+
+- char *termname(void);
 
 
 ### curs_termcap
 
-- tgetent
+curses emulation of termcap(#include <term.h>)
 
-- tgetflag
+- extern char PC;
+- extern char *UP;
+- extern char *BC;
+- extern short ospeed;
 
-- tgetnum
 
-- tgetstr
+- int tgetent(char *bp, const char *name);
 
-- tgoto
+- int tgetflag(const char *id);
 
-- tputs
+- int tgetnum(const char *id);
+
+- char *tgetstr(const char *id, char **area);
+
+- char *tgoto(const char *id, int col, int row);
+
+- int tputs(const char *str, int affcnt, int (*putc)(int));
 
 
 ### curs_terminfo
 
-- del_curterm
+curses interfaces to terminfo database(#include <term.h>)
 
-- mvcur
+- TERMINAL *cur_term;
 
-- putp
+- const char *const boolnames[];
+- const char *const boolcodes[];
+- const char *const boolfnames[];
+- const char *const numnames[];
+- const char *const numcodes[];
+- const char *const numfnames[];
+- const char *const strnames[];
+- const char *const strfnames[];
 
-- restartterm
 
-- set_curterm
+- int setupterm(const char *term, int filedes, int *errret);
 
-- setupterm
+- TERMINAL *set_curterm(TERMINAL *nterm);
+- int del_curterm(TERMINAL *oterm);
 
-- tigetflag
+- int restartterm(const char *term, int filedes, int *errret);
 
-- tigetnum
 
-- tigetstr
+- char *tparm(const char *str, ...);
 
-- tiparm*
+- int tputs(const char *str, int affcnt, int (*putc)(int));
+- int putp(const char *str);
 
-- tparm
 
-- tputs
+- int vidputs(chtype attrs, int (*putc)(int));
+- int vidattr(chtype attrs);
 
-- vid_attr
+- int vid_puts(attr_t attrs, short pair, void *opts, int (*putc)(int));
+- int vid_attr(attr_t attrs, short pair, void *opts);
 
-- vid_puts
 
-- vidattr
+- int mvcur(int oldrow, int oldcol, int newrow, int newcol);
 
-- vidputs
+
+- int tigetflag(const char *capname);
+- int tigetnum(const char *capname);
+- char *tigetstr(const char *capname);
+
+
+- char *tiparm(const char *str, ...);*
 
 
 ### curs_touch
 
-- is_linetouched
+curses refresh control routines
 
-- is_wintouched
+- (macro) int touchline(WINDOW *win, int short, int count);
 
-- touchline
 
-- touchwin
+- (macro) int touchwin(WINDOW *win);
 
-- untouchwin
+- int wtouchln(WINDOW *win, int y, int n, int changed);
 
-- wtochln
+
+- (macro) int untouchwin(WINDOW *win);
+
+
+- (macro) bool is_linetouched(WINDOW *win, int line);
+
+- (macro) bool is_wintouched(WINDOW *win);
+
 
 
 ### curs_trace
 
-- curses_trace*
+curses debugging routines
 
-- trace*
+- unsigned curses_trace(const unsigned param);*
+
+- void trace(const unsigned int param);*
 
 
 ### curs_util
 
-- delay_output
+miscellaneous curses utility routines
 
-- filter
+- const char *unctrl(chtype c);
+- wchar_t *wunctrl(cchar_t *c);
 
-- flushinp
 
-- getwin
+- const char *keyname(int c);
+- const char *key_name(wchar_t w);
 
-- key_name
 
-- keyname
+- void filter(void);
+- void nofilter(void);
 
-- nofilter
 
-- putwin
+- void use_env(bool f);
+- void use_tioctl(bool f);
 
-- unctrl
 
-- use_env
+- int putwin(WINDOW *win, FILE *filep);
+- WINDOW *getwin(FILE *filep);
 
-- use_tioctl
 
-- wunctrl
+- int delay_output(int ms);
+
+- int flushinp(void);
+
 
 
 ### curs_window
 
-- delwin
+create curses windows
 
-- derwin
+- WINDOW *newwin(int nlines, int ncols, int begin_y, int begin_x);
 
-- dupwin
+- int delwin(WINDOW *win);
 
-- mvderwin
+- int mvwin(WINDOW *win, int y, int x);
 
-- mvwin
+- WINDoW *subwin(WINDOW *orig, int nlines, int ncols, int begin_y, int begin_x);
 
-- newwin
+- WINDOW *derwin(WINDOW *orig, int nlines, int ncols, int begin_y, int begin_x);
 
-- subwin
+- int mvderwin(WINDOW *win, int par_y, int par_x);
 
-- syncok
+- WINDOW *dupwin(WINDOW *win);
 
-- wcursyncup
+- void wsyncup(WINDOW *win);
 
-- wsyncdown
+- (macro) int syncok(WINDOW *win, bool bf);
 
-- wsyncup
+- void wcursyncup(WINDOW *win);
+
+- void wsyncdown(WINDOW *win);
+
 
 
 ### default_colors
 
-- assume_default_colors*
+use terminal's default colors
 
-- use_default_colors*
+- int use_default_colors(void);*
+- int assume_default_colors(int fg, int bg);*
+
 
 
 ### define_key
 
-- define_key*
+define a keycode
+
+- int define_key(const char *definition, int keycode);*
+
 
 
 ### key_defined
 
-- key_defined
+check if a keycode is defined
+
+- int key_defined(const char *definition);
+
 
 
 ### keybound
 
-- keybound
+return definition of keycode
+
+- char *keybound(int keycode, int count);
+
 
 
 ### keyok
 
-- keyok
+enable or disable a keycode
+
+- int keyok(int keycode, bool enable);
+
 
 
 ### legacy_coding
 
-- use_legacy_coding*
+override locale-encoding checks
+
+- int use_legacy_coding(int level);*
 
 
 ### new_pair
 
-- alloc_pair*
+new curses color-pair functions
 
-- find_pair*
+- int alloc_pair(int fg, int bg);*
 
-- free_pair*
+- int find_pair(int fg, int bg);*
+
+- int free_pair(int pair);*
+
 
 
 ### resizeterm
 
-- is_term_resized*
+change the curses terminal size
 
-- resize_term*
+- bool is_term_resized(int lines, int columns);*
 
-- resizeterm*
+- int resize_term(int lines, int columns);*
+
+- int resizeterm(int lines, int columns);*
+
 
 
 ### wresize
 
-- wresize*
+resize a curses window
+
+- int wresize(WINDOW *win, int lines, int columns);*
