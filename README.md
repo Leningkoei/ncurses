@@ -4,6 +4,30 @@ A ncurses interface for common lisp (sbcl).
 
 ## c names
 
+### curs_variables
+
+curses global variables
+
+- int COLOR_PAIRS;
+
+- int COLORS;
+
+- int COLS;
+
+- int ESCDELAY;
+
+- int LINES;
+
+- int TABSIZE;
+
+- WINDOW *curscr;
+
+- WINDOW *newscr;
+  This implementation of curses uses a special window `curses` to record its updates to the terminal screen.
+  This is referred to as the "physical screen" in the `curs_refresh` and `curs_outopts` manual pages.
+
+- WINDOW *stdscr;
+
 ### curs_addch
 
 add a character (with attributes) to a curses window, then advance the cursor
@@ -341,8 +365,11 @@ curses color manipulation routines
 
 
 - int COLOR_PAIR(int n);
+  Its inverse COLOR_PAIR(n) converts a color pair number to an attribute.
+  Attributes can hold pairs in the range 0 to 255.
 
 - PAIR_NUMBER(attrs);
+  PAIR_NUMBER(attrs) extracts the color value from its attrs parameter and returns it as a color pair number.
 
 
 #### colors
