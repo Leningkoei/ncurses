@@ -1,8 +1,13 @@
 (defparameter pathnames
   (list "src/package.lisp"
-        "src/get-a-character.lisp"
-        "src/with-ncurses.lisp"
-        "src/refresh.lisp"))
+        "src/typedef.lisp"
+        "src/curs_variables.lisp"
+        "src/curs_attr.lisp"
+        "src/curs_color.lisp"
+        "src/curs_getch.lisp"
+        "src/curs_initscr.lisp"
+        "src/curs_inopts.lisp"
+        ))
 
 (defun combine (target &rest pathnames)
   (with-open-file (out target :direction :output :if-exists :supersede)

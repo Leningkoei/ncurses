@@ -1,8 +1,9 @@
 interpreter	= ros run
-compiler	= gcc
-linker		= ld
-
+c-compiler	= gcc
+c-linker	= ld
 libncurses	= libncurses.so.6
+
+compiler        = src/compiler.lisp
 
 define load-alien
 (progn					\
@@ -16,13 +17,11 @@ compile:	bin/		\
 		ncurses.so	\
 		ncurses.fasl
 	echo	done
-test:	bin/		\
-	ncurses.so	\
-	ncurses.fasl
+test:		bin/		\
+		ncurses.so	\
+		ncurses.fasl
 	$(interpreter)	--eval '$(load-alien)'		\
 			--load "bin/ncurses.fasl"	\
-			--load "test.lisp"		\
-			--eval '(main)'			\
 			--eval '(quit)'
 
 bin/:
@@ -30,19 +29,30 @@ bin/:
 
 ncurses.so:	src/ncurses.c	\
 		bin/
-	$(compiler)	-c src/ncurses.c		\
+	$(c-compiler)	-c src/ncurses.c		\
 			-l ncurses			\
+			-fPIC				\
 			-o bin/ncurses.o
-	$(linker)	bin/ncurses.o			\
+	$(c-linker)	bin/ncurses.o			\
 			-shared -o bin/ncurses.so
 
-ncurses.fasl:	src/compiler.lisp	\
-		ncurses.so		\
+ncurses.fasl:	$(compiler)	\
+		ncurses.so	\
 		bin/
 	$(interpreter)	--eval '$(load-alien)'						\
-			--load "src/compiler.lisp"					\
+			--load "$(compiler)"						\
 			--eval '(run-compiler "bin/ncurses.lisp" "bin/ncurses.fasl")'	\
 			--eval '(quit)'
 
 clean:	bin/
 	rm -r	bin/
+
+
+test-01:	bin/		\
+		ncurses.so	\
+		ncurses.fasl
+	$(interpreter)	--eval '$(load-alien)'		\
+			--load "bin/ncurses.fasl"	\
+			--load "tests/01.lisp"		\
+			--eval '(main)'			\
+			--eval '(quit)'
