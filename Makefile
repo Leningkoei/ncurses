@@ -3,7 +3,7 @@ c-compiler	= gcc
 c-linker	= ld
 libncurses	= libncurses.so.6
 
-compiler        = compiler.lisp
+compiler        = src/compiler.lisp
 
 define load-alien
 (progn					\
