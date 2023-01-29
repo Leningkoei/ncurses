@@ -1,7 +1,6 @@
 ;;;; (require :ncurses)
 
-(defun main (&rest arguments)
-  (declare (ignorable arguments))
+(defun main ()
   
   (ncurses:initscr)
   (ncurses:keypad ncurses:+stdscr+ 't)

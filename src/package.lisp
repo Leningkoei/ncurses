@@ -91,4 +91,20 @@
    :wtimeout
    :typeahead
 
+   ;; curs_printw
+   :printw
+   :wprintw
+   :mvprintw
+   :mvwprintw
+   :vw_printw
+   :vwprintw
+
+   ;; curs_refresh
+   :refresh
+   :wrefresh
+   :wnoutrefresh
+   :doupdate
+   :redrawwin
+   :wredrawln
+
    ))

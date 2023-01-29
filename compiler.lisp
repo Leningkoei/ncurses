@@ -1,12 +1,14 @@
 (defparameter pathnames
   (list "src/package.lisp"
         "src/typedef.lisp"
-        "src/curs_variables.lisp"
-        "src/curs_attr.lisp"
-        "src/curs_color.lisp"
-        "src/curs_getch.lisp"
-        "src/curs_initscr.lisp"
-        "src/curs_inopts.lisp"
+        "src/curs/variables.lisp"
+        "src/curs/attr.lisp"
+        "src/curs/color.lisp"
+        "src/curs/getch.lisp"
+        "src/curs/initscr.lisp"
+        "src/curs/inopts.lisp"
+        "src/curs/printw.lisp"
+        "src/curs/refresh.lisp"
         ))
 
 (defun combine (target &rest pathnames)

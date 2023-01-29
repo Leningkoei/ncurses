@@ -50,9 +50,20 @@ clean:	bin/
 
 test-01:	bin/		\
 		ncurses.so	\
-		ncurses.fasl
+		ncurses.fasl	\
+		tests/01.lisp
 	$(interpreter)	--eval '$(load-alien)'		\
 			--load "bin/ncurses.fasl"	\
 			--load "tests/01.lisp"		\
+			--eval '(main)'			\
+			--eval '(quit)'
+
+test-02:	bin/		\
+		ncurses.so	\
+		ncurses.fasl	\
+		tests/02.lisp
+	$(interpreter)	--eval '$(load-alien)'		\
+			--load "bin/ncurses.fasl"	\
+			--load "tests/02.lisp"		\
 			--eval '(main)'			\
 			--eval '(quit)'
