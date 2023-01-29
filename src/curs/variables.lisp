@@ -6,10 +6,6 @@
 (define-alien-variable newscr WINDOW)
 (define-alien-variable stdscr WINDOW)
 
-(defparameter *curscr* curscr "")
-(defparameter *newscr* newscr "")
-(defconstant +stdscr+ stdscr "")
-
 (declaim (inline get-color-pairs))
 (define-alien-routine get-color-pairs int
   "")
@@ -32,4 +28,16 @@
 
 (declaim (inline get-tabsize))
 (define-alien-routine get-tabsize int
+  "")
+
+(declaim (inline get-curscr))
+(define-alien-routine get-curscr WINDOW
+  "")
+
+(declaim (inline get-newscr))
+(define-alien-routine get-newscr WINDOW
+  "")
+
+(declaim (inline get-stdscr))
+(define-alien-routine get-stdscr WINDOW
   "")

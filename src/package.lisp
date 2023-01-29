@@ -6,7 +6,15 @@
   (:export
 
    ;; curs_variables
-   :+stdscr+
+   :get-color-pairs
+   :get-colors
+   :get-cols
+   :get-escdelay
+   :get-lines
+   :get-tabsize
+   :get-curscr
+   :get-newscr
+   :get-stdscr
 
    ;; curs_attr
    :attr-get
@@ -33,6 +41,19 @@
    :wstandend
    :standout
    :wstandout
+
+   ;; curs_border
+   :border
+   :wborder
+   :box
+   :hline
+   :whline
+   :vline
+   :wvline
+   :mvhline
+   :mvwhline
+   :mvvline
+   :mvwvline
 
    ;; curs_color
    :start-color
@@ -66,6 +87,12 @@
    :ungetch
    :has-key
 
+   ;; curs_getyx
+   :getyx
+   :getparyx
+   :getbegyx
+   :getmaxyx
+
    ;; curs_initscr
    :initscr
    :endwin
@@ -91,6 +118,10 @@
    :wtimeout
    :typeahead
 
+   ;; curs_move
+   :move
+   :wmove
+
    ;; curs_printw
    :printw
    :wprintw
@@ -106,5 +137,18 @@
    :doupdate
    :redrawwin
    :wredrawln
+
+   ;; curs_window
+   :newwin
+   :delwin
+   :mvwin
+   :subwin
+   :derwin
+   :mvderwin
+   :dupwin
+   :wsyncup
+   :syncok
+   :wcursyncup
+   :wsyncdown
 
    ))

@@ -1,4 +1,4 @@
-// #include <stdlib.h>
+#include <stdlib.h>
 #include <curses.h>
 
 // curs_variables
@@ -20,7 +20,15 @@ int get_lines() {
 int get_tabsize() {
   return TABSIZE;
 };
-
+WINDOW *get_curscr() {
+  return curscr;
+};
+WINDOW *get_newscr() {
+  return newscr;
+};
+WINDOW *get_stdscr() {
+  return stdscr;
+};
 
 // curs_attr
 attr_t a_normal     = A_NORMAL;
@@ -55,3 +63,17 @@ int color_blue    = COLOR_BLUE;
 int color_magenta = COLOR_MAGENTA;
 int color_cyan    = COLOR_CYAN;
 int color_white   = COLOR_WHITE;
+
+// curs_getyx
+void GETYX(WINDOW *win, int *y, int *x) {
+  getyx(win, *y, *x);
+};
+void GETPARYX(WINDOW *win, int *y, int *x) {
+  getparyx(win, *y, *x);
+};
+void GETBEGYX(WINDOW *win, int *y, int *x) {
+  getbegyx(win, *y, *x);
+};
+void GETMAXYX(WINDOW *win, int *y, int *x) {
+  getmaxyx(win, *y, *x);
+};

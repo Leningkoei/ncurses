@@ -3,12 +3,16 @@
         "src/typedef.lisp"
         "src/curs/variables.lisp"
         "src/curs/attr.lisp"
+        "src/curs/border.lisp"
         "src/curs/color.lisp"
         "src/curs/getch.lisp"
+        "src/curs/getyx.lisp"
         "src/curs/initscr.lisp"
         "src/curs/inopts.lisp"
+        "src/curs/move.lisp"
         "src/curs/printw.lisp"
         "src/curs/refresh.lisp"
+        "src/curs/window.lisp"
         ))
 
 (defun combine (target &rest pathnames)
