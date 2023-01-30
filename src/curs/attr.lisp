@@ -21,10 +21,20 @@
 (declaim (inline attroff))
 
 (declaim (inline wattroff))
+(define-alien-routine wattroff int
+  "win: WINDOW -> attrs: int -> OK: int
+"
+  (win WINDOW)
+  (attrs int))
 
 (declaim (inline attron))
 
 (declaim (inline wattron))
+(define-alien-routine wattron int
+  "win: WINDOW -> attrs: int -> OK: int
+"
+  (win WINDOW)
+  (attrs int))
 
 (declaim (inline attrset))
 (define-alien-routine attrset int
@@ -52,22 +62,27 @@
 
 (declaim (inline wstandout))
 
-(define-alien-variable a-normal     attr_t)
-(define-alien-variable a-standout   attr_t)
-(define-alien-variable a-underline  attr_t)
-(define-alien-variable a-reverse    attr_t)
-(define-alien-variable a-blink      attr_t)
-(define-alien-variable a-dim        attr_t)
-(define-alien-variable a-bold       attr_t)
-(define-alien-variable a-protect    attr_t)
-(define-alien-variable a-invis      attr_t)
-(define-alien-variable a-altcharset attr_t)
-(define-alien-variable a-italic     attr_t)
-(define-alien-variable a-chartext   attr_t)
-(define-alien-variable a-color      attr_t)
-(define-alien-variable wa-horizontal attr_t)
-(define-alien-variable wa-left       attr_t)
-(define-alien-variable wa-low        attr_t)
-(define-alien-variable wa-right      attr_t)
-(define-alien-variable wa-top        attr_t)
-(define-alien-variable wa-vertical   attr_t)
+(define-alien-variable a-normal     int)
+(define-alien-variable a-standout   int)
+(define-alien-variable a-underline  int)
+(define-alien-variable a-reverse    int)
+(define-alien-variable a-blink      int)
+(define-alien-variable a-dim        int)
+(define-alien-variable a-bold       int)
+(define-alien-variable a-protect    int)
+(define-alien-variable a-invis      int)
+(define-alien-variable a-altcharset int)
+(define-alien-variable a-italic     int)
+(define-alien-variable a-chartext   int)
+(define-alien-variable a-color      int)
+(define-alien-variable wa-horizontal int)
+(define-alien-variable wa-left       int)
+(define-alien-variable wa-low        int)
+(define-alien-variable wa-right      int)
+(define-alien-variable wa-top        int)
+(define-alien-variable wa-vertical   int)
+
+(defconstant +a-normal+    a-normal)
+(defconstant +a-standout+  a-standout)
+(defconstant +a-underline+ a-underline)
+(defconstant +a-reverse+   a-reverse)

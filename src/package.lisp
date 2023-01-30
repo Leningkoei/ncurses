@@ -1,4 +1,5 @@
 (in-package :common-lisp-user)
+(provide :ncurses)
 (defpackage :ncurses
   (:use
    :common-lisp
@@ -41,6 +42,10 @@
    :wstandend
    :standout
    :wstandout
+   :+a-normal+
+   :+a-standout+
+   :+a-underline+
+   :+a-reverse+
 
    ;; curs_border
    :border
@@ -86,6 +91,11 @@
    :mvwgetch
    :ungetch
    :has-key
+   :+key-break+
+   :+key-down+
+   :+key-up+
+   :+key-left+
+   :+key-right+
 
    ;; curs_getyx
    :getyx

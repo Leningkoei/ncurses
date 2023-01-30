@@ -24,5 +24,13 @@
   (fmt c-string))
 
 (declaim (inline mvwprintw))
+(define-alien-routine mvwprintw int
+  "win: WINDOW -> y: int -> x: int -> fmt: char* -> ... -> OK: int
+"
+  (win WINDOW)
+  (y int)
+  (x int)
+  (fmt c-string))
+
 (declaim (inline vw_printw))
 (declaim (inline vwprintw))

@@ -3,7 +3,7 @@
 (defun main ()
   
   (ncurses:initscr)
-  (ncurses:keypad ncurses:+stdscr+ 't)
+  (ncurses:keypad (ncurses:get-stdscr) 't)
   (ncurses:nonl)
   (ncurses:cbreak)
   (ncurses:echo)
