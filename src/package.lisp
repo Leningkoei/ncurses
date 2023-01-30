@@ -17,6 +17,15 @@
    :get-newscr
    :get-stdscr
 
+   ;; curs_addch
+   :addch
+   :waddch
+   :mvaddch
+   :mvaddch
+   :mvwaddch
+   :echochar
+   :wechochar
+
    ;; curs_attr
    :attr-get
    :wattr-get

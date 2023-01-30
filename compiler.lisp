@@ -2,6 +2,7 @@
   (list "src/package.lisp"
         "src/typedef.lisp"
         "src/curs/variables.lisp"
+        "src/curs/addch.lisp"
         "src/curs/attr.lisp"
         "src/curs/border.lisp"
         "src/curs/color.lisp"
