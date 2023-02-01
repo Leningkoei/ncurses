@@ -55,6 +55,7 @@
    :+a-standout+
    :+a-underline+
    :+a-reverse+
+   :ctrl
 
    ;; curs_border
    :border
@@ -156,6 +157,20 @@
    :doupdate
    :redrawwin
    :wredrawln
+
+   ;; curs_util
+   :unctrl
+   :wunctrl
+   :keyname
+   :key-name
+   :filter
+   :nofilter
+   :use-env
+   :use-tioctl
+   :putwin
+   :getwin
+   :delay-output
+   :flushinp
 
    ;; curs_window
    :newwin

@@ -23,7 +23,6 @@ test:		bin/		\
 	$(interpreter)	--eval '$(load-alien)'		\
 			--load "bin/ncurses.fasl"	\
 			--eval '(quit)'
-
 bin/:
 	mkdir	bin
 
@@ -57,3 +56,11 @@ test-it:	bin/			\
 			--load "tests/$(it).lisp"	\
 			--eval '(main)'			\
 			--eval '(quit)'
+
+test-c:	test.o
+	bin/test.o
+test.o:	bin/		\
+	tests/test.c
+	$(c-compiler)	tests/test.c	\
+			-l ncurses	\
+			-o bin/test.o

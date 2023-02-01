@@ -31,25 +31,25 @@ WINDOW *get_stdscr() {
 };
 
 // curs_attr
-int a_normal     = A_NORMAL;
-int a_standout   = A_STANDOUT;
-int a_underline  = A_UNDERLINE;
-int a_reverse    = A_REVERSE;
-int a_blink      = A_BLINK;
-int a_dim        = A_DIM;
-int a_bold       = A_BOLD;
-int a_protect    = A_PROTECT;
-int a_invis      = A_INVIS;
-int a_altcharset = A_ALTCHARSET;
-int a_italic     = A_ITALIC;
-int a_chartext   = A_CHARTEXT;
-int a_color      = A_COLOR;
-int wa_horizontal = WA_HORIZONTAL;
-int wa_left       = WA_LEFT;
-int wa_low        = WA_LOW;
-int wa_right      = WA_RIGHT;
-int wa_top        = WA_TOP;
-int wa_vertical   = WA_VERTICAL;
+attr_t a_normal     = A_NORMAL;
+attr_t a_standout   = A_STANDOUT;
+attr_t a_underline  = A_UNDERLINE;
+attr_t a_reverse    = A_REVERSE;
+attr_t a_blink      = A_BLINK;
+attr_t a_dim        = A_DIM;
+attr_t a_bold       = A_BOLD;
+attr_t a_protect    = A_PROTECT;
+attr_t a_invis      = A_INVIS;
+attr_t a_altcharset = A_ALTCHARSET;
+attr_t a_italic     = A_ITALIC;
+attr_t a_chartext   = A_CHARTEXT;
+attr_t a_color      = A_COLOR;
+attr_t wa_horizontal = WA_HORIZONTAL;
+attr_t wa_left       = WA_LEFT;
+attr_t wa_low        = WA_LOW;
+attr_t wa_right      = WA_RIGHT;
+attr_t wa_top        = WA_TOP;
+attr_t wa_vertical   = WA_VERTICAL;
 
 // curs_color
 int color_pair(int n) {

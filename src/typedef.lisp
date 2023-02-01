@@ -6,5 +6,5 @@
 (define-alien-type void* (* (struct void)))
 
 (define-alien-type WINDOW void*)
-(define-alien-type attr_t void*)
-(define-alien-type chtype char)
+(define-alien-type attr-t int)
+(define-alien-type chtype int)

@@ -13,6 +13,7 @@
         "src/curs/move.lisp"
         "src/curs/printw.lisp"
         "src/curs/refresh.lisp"
+        "src/curs/util.lisp"
         "src/curs/window.lisp"
         ))
 

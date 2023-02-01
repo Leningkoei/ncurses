@@ -19,6 +19,10 @@
 (declaim (inline wattr-on))
 
 (declaim (inline attroff))
+(define-alien-routine attroff int
+  "attrs: int
+"
+  (attrs int))
 
 (declaim (inline wattroff))
 (define-alien-routine wattroff int
@@ -28,6 +32,10 @@
   (attrs int))
 
 (declaim (inline attron))
+(define-alien-routine attron int
+  "attrs: int -> OK: int
+"
+  (attrs int))
 
 (declaim (inline wattron))
 (define-alien-routine wattron int
@@ -62,27 +70,30 @@
 
 (declaim (inline wstandout))
 
-(define-alien-variable a-normal     int)
-(define-alien-variable a-standout   int)
-(define-alien-variable a-underline  int)
-(define-alien-variable a-reverse    int)
-(define-alien-variable a-blink      int)
-(define-alien-variable a-dim        int)
-(define-alien-variable a-bold       int)
-(define-alien-variable a-protect    int)
-(define-alien-variable a-invis      int)
-(define-alien-variable a-altcharset int)
-(define-alien-variable a-italic     int)
-(define-alien-variable a-chartext   int)
-(define-alien-variable a-color      int)
-(define-alien-variable wa-horizontal int)
-(define-alien-variable wa-left       int)
-(define-alien-variable wa-low        int)
-(define-alien-variable wa-right      int)
-(define-alien-variable wa-top        int)
-(define-alien-variable wa-vertical   int)
+(define-alien-variable a-normal     attr-t)
+(define-alien-variable a-standout   attr-t)
+(define-alien-variable a-underline  attr-t)
+(define-alien-variable a-reverse    attr-t)
+(define-alien-variable a-blink      attr-t)
+(define-alien-variable a-dim        attr-t)
+(define-alien-variable a-bold       attr-t)
+(define-alien-variable a-protect    attr-t)
+(define-alien-variable a-invis      attr-t)
+(define-alien-variable a-altcharset attr-t)
+(define-alien-variable a-italic     attr-t)
+(define-alien-variable a-chartext   attr-t)
+(define-alien-variable a-color      attr-t)
+(define-alien-variable wa-horizontal attr-t)
+(define-alien-variable wa-left       attr-t)
+(define-alien-variable wa-low        attr-t)
+(define-alien-variable wa-right      attr-t)
+(define-alien-variable wa-top        attr-t)
+(define-alien-variable wa-vertical   attr-t)
 
 (defconstant +a-normal+    a-normal)
 (defconstant +a-standout+  a-standout)
 (defconstant +a-underline+ a-underline)
 (defconstant +a-reverse+   a-reverse)
+
+(defmacro ctrl (x)
+  `(logand (char-int ,x) #x1f))
