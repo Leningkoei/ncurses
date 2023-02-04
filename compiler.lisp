@@ -10,6 +10,7 @@
         "src/curs/getyx.lisp"
         "src/curs/initscr.lisp"
         "src/curs/inopts.lisp"
+        "src/curs/kernel.lisp"
         "src/curs/move.lisp"
         "src/curs/printw.lisp"
         "src/curs/refresh.lisp"

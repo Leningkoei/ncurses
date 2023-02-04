@@ -138,6 +138,19 @@
    :wtimeout
    :typeahead
 
+   ;; curs_kernel
+   :def-prog-mode
+   :def-shell-mode
+   :reset-prog-mode
+   :reset-shell-mode
+   :resetty
+   :savetty
+   :getsyx
+   :setsyx
+   :ripoffline
+   :curs-set
+   :napms
+
    ;; curs_move
    :move
    :wmove
