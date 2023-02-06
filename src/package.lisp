@@ -6,6 +6,9 @@
    :sb-alien)
   (:export
 
+   ;; constants
+   :+empty-key+
+
    ;; curs_variables
    :get-color-pairs
    :get-colors
@@ -69,6 +72,16 @@
    :mvwhline
    :mvvline
    :mvwvline
+
+   ;; curs_clear
+   :erase
+   :werase
+   :clear
+   :wclear
+   :clrtobot
+   :wclrtobot
+   :clrtoeol
+   :wclrtoeol
 
    ;; curs_color
    :start-color
@@ -197,5 +210,8 @@
    :syncok
    :wcursyncup
    :wsyncdown
+
+   ;; wresize
+   :wresize
 
    ))

@@ -3,10 +3,6 @@
 int main() {
 
   initscr();
-  nonl();
-  // cbreak();
-  raw();
-  keypad(stdscr, TRUE);
 
   getch();
 

@@ -18,9 +18,36 @@ Regardless of the function used for creating a new window (e.g., `newwin`, `subw
 
 (declaim (inline delwin))
 (declaim (inline mvwin))
+
 (declaim (inline subwin))
+(define-alien-routine subwin WINDOW
+  ""
+  (win WINDOW)
+  (nlines int)
+  (ncols int)
+  (begin-y int)
+  (begin-x int))
+
 (declaim (inline derwin))
+(define-alien-routine derwin WINDOW
+  "win: WINDOW -> nlines: int -> ncols: int -> begin-y: int -> begin-x: int -> derwin: WINDOW
+Calling `derwin` is the same as calling `subwin`, except that /begin-y/ and /begin-x/ are releave to the origin of the window /orig/ rather than the screen. There is no different between the subwindows and the derived windows.
+"
+  (win WINDOW)
+  (nlines int)
+  (ncols int)
+  (begin-y int)
+  (begin-x int))
+
 (declaim (inline mvderwin))
+(define-alien-routine mvderwin int
+  "win: WINDOW -> par-y: int -> par-x: int -> OK: int
+Calling `mvderwin` moves a derived window (or subwindow) inside its parent window. The screen-relative parameters of the window are not changed. This routine is used to display different parts of the parent window at the same physical position on the screen.
+"
+  (win WINDOW)
+  (par-y int)
+  (par-x int))
+
 (declaim (inline dupwin))
 (declaim (inline wsyncup))
 (declaim (inline syncok))

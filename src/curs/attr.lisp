@@ -57,6 +57,15 @@
 (declaim (inline mvchgat))
 
 (declaim (inline mvwchgat))
+(define-alien-routine mvwchgat int
+  ""
+  (win WINDOW)
+  (y int)
+  (x int)
+  (n int)
+  (attr attr-t)
+  (pair short)
+  (opts void*))
 
 (declaim (inline color-set))
 
